@@ -9,6 +9,26 @@ const cellGap = 3;
 const gameGrid = [];
 
 
+// mouse
+
+const mouse = {
+    x: undefined,
+    y: undefined,
+    width: 0.1,
+    height: 0.1
+}
+
+const canvasPosition = canvas.getBoundingClientRect();
+canvas.addEventListener('mousemove', function(e){
+    mouse.x = e.x - canvasPosition.left;
+    mouse.y = e.y - canvasPosition.top;
+})
+canvas.addEventListener('mouseleave', function(){
+    mouse.y = undefined;
+    mouse.x = undefined;
+})
+
+
 // gameBoard
 
 const controlsBar = {

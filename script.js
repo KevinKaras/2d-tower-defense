@@ -71,7 +71,13 @@ function handleGameGrid(){
     for(let i = 0; i < gameGrid.length; i++){
         gameGrid[i].draw()
     }
-}
+} 
+
+// PROJECTILES -----------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 // DEFENDERS -------------------------------------------------------------------------------------------------------------------
 
@@ -112,6 +118,17 @@ canvas.addEventListener('click', function(){
 function handleDefenders(){
     for(let i = 0; i < defenders.length; i ++){
         defenders[i].draw()
+        for(let j = 0; j < enemies.length; j++){
+            if(collision(defenders[i] ,enemies[j])){
+                enemies[j].movement = 0;
+                defenders[i].health -= 0.2;
+            }
+            if(defenders[i] && defenders[i].health <= 0){
+                defenders.splice(i,1)
+                i--
+                enemies[j].movement = enemies[j].speed
+            }
+        }
     }
 }
 
@@ -158,7 +175,7 @@ function handleEnemies(){
 
 
 
-// GAME PROPERTIES
+// GAME PROPERTIES ------------------------------------------------------------------------------------------------------------------------
 function handleGameStatus(){
     ctx.fillStyle = 'gold';
     ctx.font = "30px Arial";

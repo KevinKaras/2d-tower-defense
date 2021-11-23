@@ -132,7 +132,7 @@ function handleDefenders(){
     }
 }
 
-// ***************************************
+
 //      LEFT OFF ON HANDLE DEFENDERS IF THEY EXIST
 //      AFTER ERROR OF ENEMY DESTROYING DEFENDER AND GAME CRASHING AT 0 HEALTH DEFENDER
 

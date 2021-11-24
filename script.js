@@ -118,7 +118,7 @@ function handleDefenders(){
     for(let i = 0; i < defenders.length; i ++){
         defenders[i].draw()
         for(let j = 0; j < enemies.length; j++){
-            if(collision(defenders[i] ,enemies[j])){
+            if(defenders[i] && collision(defenders[i] ,enemies[j])){
                 enemies[j].movement = 0;
                 defenders[i].health -= 0.2;
             }

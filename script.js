@@ -6,16 +6,15 @@ canvas.width = 900;
 // Global vars
 const cellSize = 100;
 const cellGap = 3;
-const gameGrid = [];
-const defenders = [];
 let numberOfResources = 300;
-const enemies = [];
 let frame = 0;
-const enemyPositions = [];
 let enemiesInterval = 600;                                                    // As this number changes, the rate of spawn changes for enemies
 let gameOver = false;
 
-
+const enemyPositions = [];
+const enemies = [];
+const gameGrid = [];
+const defenders = [];
 // MOUSE -------------------------------------------------------------------------------------------------------------------------
 
 const mouse = {

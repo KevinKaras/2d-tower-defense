@@ -12,7 +12,7 @@ let numberOfResources = 300;
 const enemies = [];
 let frame = 0;
 const enemyPositions = [];
-let enemiesInterval = 600;
+let enemiesInterval = 600;                                                    // As this number changes, the rate of spawn changes for enemies
 let gameOver = false;
 
 
@@ -176,7 +176,7 @@ function handleEnemies(){
         let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
         enemies.push(new Enemy(verticalPosition));
         enemyPositions.push(verticalPosition)
-        if(enemiesInterval > 120) enemiesInterval -= 50;
+        if(enemiesInterval > 120) enemiesInterval -= 50;                            // This changes the rate in which enemies spawn
     }
 }
 

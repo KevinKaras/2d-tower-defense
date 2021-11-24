@@ -10,11 +10,13 @@ let numberOfResources = 300;
 let frame = 0;
 let enemiesInterval = 600;                                                    // As this number changes, the rate of spawn changes for enemies
 let gameOver = false;
+let score = 0;
 
 const enemyPositions = [];
 const enemies = [];
 const gameGrid = [];
 const defenders = [];
+const projectiles = [];
 // MOUSE -------------------------------------------------------------------------------------------------------------------------
 
 const mouse = {
@@ -51,6 +53,7 @@ class Cell {
 
     draw(){
         if(mouse.x && mouse.y && collision(this, mouse)){
+            
             ctx.strokestyle = 'black'
             ctx.strokeRect(this.x, this.y, this.width, this.height)
         }
@@ -74,7 +77,47 @@ function handleGameGrid(){
 
 // PROJECTILES -----------------------------------------------------------------------------------------------------------------
 
+class Projectile {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.width = 10;
+        this.height = 10;
+        this.power = 20;
+        this.speed = 5;
 
+    }
+    update(){
+        this.x += this.speed;
+    }
+    draw(){
+        ctx.fillStyle = 'black';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function handleProjectiles(){
+    for(let i = 0; i < projectiles.length; i++){
+        projectiles[i].update()
+        projectiles[i].draw();
+        
+        for(let j = 0; j < enemies.length; j++){
+            if(enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])){
+                enemies[j].health -= projectiles[i].power
+                projectiles.splice(i, 1);
+                i--;
+            }
+        }
+
+        if(projectiles[i] && projectiles[i].x > canvas.width - cellSize){
+            projectiles.splice(i, 1);
+            i--;
+
+        }
+    }
+}
 
 
 
@@ -99,6 +142,12 @@ class Defender {
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30)
 
     }
+    update(){
+        this.timer++;
+        if(this.timer % 100 === 0){
+            projectiles.push(new Projectile(this.x + 70, this.y + 50))
+        }
+    }
 }
 canvas.addEventListener('click', function(){
     const gridPositionX = mouse.x - (mouse.x % cellSize);
@@ -117,6 +166,7 @@ canvas.addEventListener('click', function(){
 function handleDefenders(){
     for(let i = 0; i < defenders.length; i ++){
         defenders[i].draw()
+        defenders[i].update()
         for(let j = 0; j < enemies.length; j++){
             if(defenders[i] && collision(defenders[i] ,enemies[j])){
                 enemies[j].movement = 0;
@@ -170,6 +220,13 @@ function handleEnemies(){
         if(enemies[i].x < 0){
             gameOver = true;
         }
+        if(enemies[i].health <= 0){
+            let gainedResource = enemies[i].maxHealth/10;
+            numberOfResources += gainedResource;
+            score += gainedResource;
+            enemies.splice(i, 1);
+            i--;
+        }
     }
     if(frame % enemiesInterval === 0){
         let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
@@ -185,7 +242,8 @@ function handleEnemies(){
 function handleGameStatus(){
     ctx.fillStyle = 'gold';
     ctx.font = "30px Arial";
-    ctx.fillText('Resources: ' + numberOfResources, 20, 55)
+    ctx.fillText('Resources: ' + numberOfResources, 20, 75)
+    ctx.fillText('Score: ' + score, 20, 35)
     if(gameOver){
         ctx.fillStyle = 'black';
         ctx.font = "90px Arial"
@@ -200,6 +258,7 @@ function animate(){
     ctx.fillRect(0,0, controlsBar.width, controlsBar.height);
     handleGameGrid();
     handleDefenders();
+    handleProjectiles();
     handleEnemies();
     handleGameStatus();
     frame++;

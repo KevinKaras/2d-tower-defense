@@ -343,5 +343,4 @@ function collision(first, second){
 
 
 
-//  Debug why the collision modification where enemies not colliding with defenders causes game to end
 

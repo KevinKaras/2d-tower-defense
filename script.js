@@ -339,3 +339,9 @@ function collision(first, second){
         return true;
     };
 }  
+
+
+
+
+//  Debug why the collision modification where enemies not colliding with defenders causes game to end
+

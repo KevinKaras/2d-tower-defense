@@ -8,7 +8,7 @@ const cellSize = 100;
 const cellGap = 3;
 let numberOfResources = 300;
 let frame = 0;
-let enemiesInterval = 600;                                                    // As this number changes, the rate of spawn changes for enemies
+let enemiesInterval = 600;                                               
 let gameOver = false;
 let score = 0;
 const winningScore = 10;
@@ -195,8 +195,7 @@ function handleDefenders(){
 }
 
 
-//      LEFT OFF ON HANDLE DEFENDERS IF THEY EXIST
-//      AFTER ERROR OF ENEMY DESTROYING DEFENDER AND GAME CRASHING AT 0 HEALTH DEFENDER
+
 
 
 
@@ -247,7 +246,7 @@ function handleEnemies(){
         let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize + cellGap;
         enemies.push(new Enemy(verticalPosition));
         enemyPositions.push(verticalPosition)
-        if(enemiesInterval > 120) enemiesInterval -= 50;                            // This changes the rate in which enemies spawn
+        if(enemiesInterval > 120) enemiesInterval -= 50;                            
     }
 }
 

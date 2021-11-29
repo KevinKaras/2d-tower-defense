@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.height = 600;
 canvas.width = 900;
 
-// Global vars
+// GLOBAL VARIABLES --------------------------------------------------------------------------------------------------------------
 const cellSize = 100;
 const cellGap = 3;
 let numberOfResources = 300;
@@ -157,6 +157,8 @@ class Defender {
         }
     }
 }
+
+
 canvas.addEventListener('click', function(){
     const gridPositionX = mouse.x - (mouse.x % cellSize) + cellGap;
     const gridPositionY = mouse.y - (mouse.y % cellSize) + cellGap;
@@ -195,11 +197,6 @@ function handleDefenders(){
 }
 
 
-
-
-
-
-
 // ENEMIES --------------------------------------------------------------------------------------------------------------------------------
 class Enemy {
     constructor(verticalPosition){
@@ -225,6 +222,8 @@ class Enemy {
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30)
     }
 }
+
+
 function handleEnemies(){
     for(let i = 0; i < enemies.length; i++){
         enemies[i].update()
@@ -289,6 +288,7 @@ function handleResources(){
 
 
 // GAME PROPERTIES ------------------------------------------------------------------------------------------------------------------------
+
 function handleGameStatus(){
     ctx.fillStyle = 'gold';
     ctx.font = "30px Arial";

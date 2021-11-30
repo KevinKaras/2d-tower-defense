@@ -196,6 +196,31 @@ function handleDefenders(){
     }
 }
 
+// FLOATING MESSAGES ---------------------------------------------------------------------------------------------------------------------
+
+const floatingMessages = [];
+
+class floatingMessage {
+    constructor(value, x, y, size, color){
+        this.value = value;
+        this.x = x;
+        this.y = x;
+        this.size = size;
+        this.lifeSpan = 0;
+        this.color = color;
+    }
+
+    update(){
+        this.y -= 0.3;
+        this.lifeSpan += 1;
+    }
+    draw(){
+        ctx.fillStyle = this.color
+    }
+}
+
+
+
 
 // ENEMIES --------------------------------------------------------------------------------------------------------------------------------
 class Enemy {
@@ -222,6 +247,8 @@ class Enemy {
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30)
     }
 }
+
+
 
 
 function handleEnemies(){

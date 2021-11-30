@@ -327,17 +327,19 @@ function animate(){
 }
 animate()
 
-function collision(first, second){
-    if(
-        !( first.x > second.x + second.width  ||
-           first.x + first.width < second.x   ||
-           first.y > second.y + second.height ||
-           first.y + first.height < second.y)
+// function collision(first, second){
+//     if(
+//         !( first.x > second.x + second.width  ||
+//            first.x + first.width < second.x   ||
+//            first.y > second.y + second.height ||
+//            first.y + first.height < second.y)
         
-    ){
-        return true;
-    };
-}  
+//     ){
+//         return true;
+//     };
+// }  
+
+// THERE IS A PROBLEM WITH COLLISION IN THIS CODE SOMEWHERE LOOK FOR IT AND DEBUG TOMORROW.
 
 
 

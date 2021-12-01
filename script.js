@@ -11,7 +11,7 @@ let frame = 0;
 let enemiesInterval = 600;                                               
 let gameOver = false;
 let score = 0;
-const winningScore = 10;
+const winningScore = 35;
 
 const resources = [];
 const enemyPositions = [];
@@ -192,7 +192,7 @@ class floatingMessage {
     constructor(value, x, y, size, color){
         this.value = value;
         this.x = x;
-        this.y = x;
+        this.y = y;
         this.size = size;
         this.lifeSpan = 0;
         this.color = color;
@@ -202,7 +202,7 @@ class floatingMessage {
     update(){
         this.y -= 0.3;
         this.lifeSpan += 1;
-        if(this.opacity > 0.05) this.opacity -= 0.05;
+        if(this.opacity > 0.03) this.opacity -= 0.03;
     }
     draw(){
         ctx.globalAlpha = this.opacity;
@@ -218,7 +218,7 @@ function handleFloatingMessages(){
         floatingMessages[i].update();
         floatingMessages[i].draw();
         if(floatingMessages[i].lifeSpan >= 50){
-            floatingMessages[i].splice(i, 1);
+            floatingMessages.splice(i, 1);
             i--;
         }
     }
@@ -264,7 +264,10 @@ function handleEnemies(){
             gameOver = true;
         }
         if(enemies[i].health <= 0){
+
             let gainedResource = enemies[i].maxHealth/10;
+            floatingMessages.push(new floatingMessage('+' + gainedResource, enemies[i].x, enemies[i].y, 30, 'black'))
+            floatingMessages.push(new floatingMessage('+' + gainedResource, 250, 50, 30, 'gold'))
             numberOfResources += gainedResource;
             score += gainedResource;
             const findThisIndex = enemies.indexOf(enemies[i].y)
@@ -310,6 +313,8 @@ function handleResources(){
         resources[i].draw()
         if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)){
             numberOfResources += resources[i].amount;
+            floatingMessages.push(new floatingMessage('+' + resources[i].amount, resources[i].x, resources[i].y, 30, 'black'))
+            floatingMessages.push(new floatingMessage('+' + resources[i].amount, 250, 50, 30, 'gold'))
             resources.splice(i, 1);
             i--;
         }
@@ -378,19 +383,19 @@ function animate(){
 }
 animate()
 
-// function collision(first, second){
-//     if(
-//         !( first.x > second.x + second.width  ||
-//            first.x + first.width < second.x   ||
-//            first.y > second.y + second.height ||
-//            first.y + first.height < second.y)
+function collision(first, second){
+    if(
+        !( first.x > second.x + second.width  ||
+           first.x + first.width < second.x   ||
+           first.y > second.y + second.height ||
+           first.y + first.height < second.y)
         
-//     ){
-//         return true;
-//     };
-// }  
+    ){
+        return true;
+    };
+}  
 
-// THERE IS A PROBLEM WITH COLLISION IN THIS CODE SOMEWHERE LOOK FOR IT AND DEBUG TOMORROW.
+
 
 
 

@@ -137,7 +137,8 @@ class Defender {
         this.y = y;
         this.width = cellSize - cellGap * 2;
         this.height = cellSize - cellGap * 2;
-        this.shooting = false
+        this.shooting = false;
+        this.shootNow = false;
         this.health = 100;
         this.projectiles = [];
         this.timer = 0;
@@ -154,17 +155,27 @@ class Defender {
         ctx.fillStyle = 'gold';
         ctx.font = '30px Arial';
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30)
+        ctx.drawImage(defender1, this.frameX * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
 
     }
     update(){
-        if(this.shooting){
-            this.timer++;
-            if(this.timer % 100 === 0){
-                projectiles.push(new Projectile(this.x + 70, this.y + 50))
-            }
-        } else {
-            this.timer = 0;
+        if(frame % 10 === 0){
+            if(this.frameX < this.maxFrame) this.frameX++;
+            else this.frameX = this.minFrame;
+            if(this.frameX === 15) this.shootNow = true;
         }
+        if(this.shooting){
+            this.minFrame = 0;
+            this.maxFrame = 15;
+        } else {
+            this.minFrame = 17;
+            this.maxFrame = 23;
+        }
+
+        if(this.shooting && this.shootNow){
+            projectiles.push(new Projectile(this.x + 70, this.y + 50));
+            this.shootNow = false;
+        } 
     }
 }
 

@@ -126,6 +126,10 @@ function handleProjectiles(){
 
 
 // DEFENDERS -------------------------------------------------------------------------------------------------------------------
+const defender1 = new Image();
+defender1.src = './Images/defender1.png';
+
+
 
 class Defender {
     constructor(x, y){
@@ -137,6 +141,12 @@ class Defender {
         this.health = 100;
         this.projectiles = [];
         this.timer = 0;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.minFrame = 0;
+        this.maxFrame = 16;
+        this.spriteWidth = 194;
+        this.spriteHeight = 194;
     }
     draw(){
         ctx.fillStyle = 'blue';

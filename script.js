@@ -202,7 +202,7 @@ class floatingMessage {
     update(){
         this.y -= 0.3;
         this.lifeSpan += 1;
-        if(this.opacity > 0.01) this.opacity -= 0.01;
+        if(this.opacity > 0.05) this.opacity -= 0.05;
     }
     draw(){
         ctx.globalAlpha = this.opacity;
@@ -214,7 +214,7 @@ class floatingMessage {
 }
 
 function handleFloatingMessages(){
-    for(let i = 0; i < floatingMessages.lenght; i++){
+    for(let i = 0; i < floatingMessages.length; i++){
         floatingMessages[i].update();
         floatingMessages[i].draw();
         if(floatingMessages[i].lifeSpan >= 50){

@@ -233,6 +233,11 @@ const enemyTypes = [];
 const enemy1 = new Image();
 enemy1.src = './Images/enemy1.png';
 enemyTypes.push(enemy1)
+const enemy2 = new Image();
+enemy2.src = './Images/enemy2.png';
+enemyTypes.push(enemy2);
+
+
 class Enemy {
     constructor(verticalPosition){
         this.x = canvas.width;
@@ -243,7 +248,7 @@ class Enemy {
         this.movement = this.speed;
         this.health = 100;
         this.maxHealth = this.health;
-        this.enemyType = enemyTypes[0];
+        this.enemyType = enemyTypes[Math.floor((Math.random() * enemyTypes.length))]; 
         this.frameX = 0;
         this.frameY = 0;
         this.minFrame = 0;
@@ -256,14 +261,14 @@ class Enemy {
         this.x -= this.movement
         if(frame % 10 === 0){
             if(this.frameX < this.maxFrame) this.frameX++;
-        else this.frameX = this.minFrame;
+            else this.frameX = this.minFrame;
         }
         
     }
 
     draw(){
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        // ctx.fillStyle = 'red';
+        // ctx.fillRect(this.x, this.y, this.width, this.height)
         ctx.fillStyle = 'black';
         ctx.font = '30px Arial';
         ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30)

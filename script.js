@@ -350,7 +350,12 @@ class Enemy {
         this.frameX = 0;
         this.frameY = 0;
         this.minFrame = 0;
-        this.maxFrame = 4;
+        if(this.enemyType === enemy1){
+            this.maxFrame = 4;
+        } else if (this.enemyType === enemy2){
+            this.maxFrame = 7;
+        }
+        
         this.spriteWidth = 256;
         this.spriteHeight = 256;
     }
@@ -397,7 +402,7 @@ function handleEnemies(){
 
             let gainedResource = enemies[i].maxHealth/10;
             floatingMessages.push(new floatingMessage('+' + gainedResource, enemies[i].x, enemies[i].y, 30, 'black'))
-            floatingMessages.push(new floatingMessage('+' + gainedResource, 250, 50, 30, 'gold'))
+            floatingMessages.push(new floatingMessage('+' + gainedResource, 400, 85, 30, 'gold'))
             numberOfResources += gainedResource;
             score += gainedResource;
             const findThisIndex = enemies.indexOf(enemies[i].y)
@@ -444,7 +449,7 @@ function handleResources(){
         if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)){
             numberOfResources += resources[i].amount;
             floatingMessages.push(new floatingMessage('+' + resources[i].amount, resources[i].x, resources[i].y, 30, 'black'))
-            floatingMessages.push(new floatingMessage('+' + resources[i].amount, 250, 50, 30, 'gold'))
+            floatingMessages.push(new floatingMessage('+' + resources[i].amount, 400, 85, 30, 'gold'))
             resources.splice(i, 1);
             i--;
         }

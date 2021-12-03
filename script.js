@@ -180,13 +180,25 @@ class Defender {
             else this.frameX = this.minFrame;
             if(this.frameX === 15) this.shootNow = true;
         }
-        if(this.shooting){
-            this.minFrame = 0;
-            this.maxFrame = 16;
-        } else {
-            this.minFrame = 17;
-            this.maxFrame = 24;
+
+        if(chosenDefender === 1){
+           if(this.shooting){
+                this.minFrame = 0;
+                this.maxFrame = 16;
+            } else {
+                this.minFrame = 17;
+                this.maxFrame = 23;
         }
+        } else if (chosenDefender === 2){
+            if(this.shooting){
+                this.minFrame = 13;
+                this.maxFrame = 28;
+            } else {
+                this.minFrame = 0;
+                this.maxFrame = 12;
+            }
+        }
+        
 
         if(this.shooting && this.shootNow){
             projectiles.push(new Projectile(this.x + 70, this.y + 50));
